@@ -50,9 +50,9 @@ class Ball(pygame.sprite.Sprite):
         self.image = pygame.Surface((BALL_SIZE, BALL_SIZE))
         self.image.fill(WHITE)
         self.rect = self.image.get_rect()
-        self.rect.center = (width // 2, height // 2)
+        self.rect.center = (50, height // 2)
 
-        angle = random.uniform(-math.pi / 3, math.pi / 3)
+        angle = random.uniform(-math.pi / 3.5, math.pi / 3.5)
         self.speed_x = 10 * math.cos(angle)
         self.speed_y = 10 * math.sin(angle)
 
@@ -92,17 +92,17 @@ while True:
         ball.speed_y *= -1  
     if ball.rect.left <= 0:
         score1 += 1
-        ball.rect.x = width // 2
+        ball.rect.x = 50
         ball.rect.y = height // 2
         angle = random.uniform(-math.pi / 2, math.pi / 4)
         ball.speed_x = 10 * math.cos(angle)
         ball.speed_y = 10 * math.sin(angle)
     if ball.rect.right >= width:
         score2 += 1
-        ball.rect.x = width // 2
+        ball.rect.x = 750
         ball.rect.y = height // 2
-        angle = random.uniform(-math.pi / 2, math.pi / 4)
-        ball.speed_x = 10 * math.cos(angle)
+        angle = random.uniform(math.pi / 2, math.pi / 4)
+        ball.speed_x = -10 * math.cos(angle)
         ball.speed_y = 10 * math.sin(angle)
 
     if pygame.sprite.collide_mask(player_paddle, ball):
@@ -113,8 +113,8 @@ while True:
 
     #update screen
     screen.fill(BLACK)
-    player_paddle.displayScore("Player 1: ", score1, 100, 20, WHITE)
-    opponent_paddle.displayScore("Player 2: ", score2, 600, 20, WHITE)
+    player_paddle.displayScore("Player 2: ", score1, 600, 20, WHITE)
+    opponent_paddle.displayScore("Player 1: ", score2, 100, 20, WHITE)
 
     all_sprites.update()
     all_sprites.draw(screen)
